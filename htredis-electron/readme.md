@@ -15,7 +15,7 @@ npm install --save-dev @electron-forge/plugin-fuses
 npm install
 
 npm run start
-
+npm run  package-win
 npm run make 打包
 
 ### resoures说明
