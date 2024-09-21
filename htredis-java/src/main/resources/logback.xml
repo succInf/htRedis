@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 日志存放路径 -->
+    <!--   mac路径配置 -->
+    <property name="log.path" value="./logs" />
+    <!-- 服务器路径配置   -->
+    <!--    <property name="log.path" value="/home/src/logs" />-->
+    <!-- 日志输出格式 -->
+    <property name="log.pattern" value="%yellow(%d{yyyy-MM-dd HH:mm:ss.SSS}) %red([%thread]) %highlight(%-5level) %cyan(%logger{50}) - [%method,%line] - %magenta(%msg)  %n" />
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--格式化输出（配色）：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--     每天生成一个html格式的日志开始
+        <appender name="FILE_HTML" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                日志文件输出的文件名
+                <FileNamePattern>${log.path}/logOneDay-%d{yyyy-MM-dd}.%i.html</FileNamePattern>
+                日志文件保留天数
+                <MaxHistory>30</MaxHistory>
+                <MaxFileSize>10MB</MaxFileSize>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                    <pattern>%p%d%msg%M%F{32}%L</pattern>
+                </layout>
+            </encoder>
+        </appender>
+         每天生成一个html格式的日志结束 -->
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="file_OneDay_All" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${log.path}/logOneDay-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>15</MaxHistory>
+            <maxFileSize>200MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--    &lt;!&ndash; 系统日志输出 &ndash;&gt;
+        <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.path}/sys-info.log</file>
+            &lt;!&ndash; 循环政策：基于时间创建日志文件 &ndash;&gt;
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                &lt;!&ndash; 日志文件名格式 &ndash;&gt;
+                <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+                &lt;!&ndash; 日志最大的历史 60天 &ndash;&gt;
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${log.pattern}</pattern>
+
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                &lt;!&ndash; 过滤的级别 &ndash;&gt;
+                <level>INFO</level>
+                &lt;!&ndash; 匹配时的操作：接收（记录） &ndash;&gt;
+                <onMatch>ACCEPT</onMatch>
+                &lt;!&ndash; 不匹配时的操作：拒绝（不记录） &ndash;&gt;
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </appender>-->
+
+    <!--    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.path}/sys-error.log</file>
+            &lt;!&ndash; 循环政策：基于时间创建日志文件 &ndash;&gt;
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                &lt;!&ndash; 日志文件名格式 &ndash;&gt;
+                <fileNamePattern>${log.path}/sys-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+                &lt;!&ndash; 日志最大的历史 60天 &ndash;&gt;
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                &lt;!&ndash; 过滤的级别 &ndash;&gt;
+                <level>ERROR</level>
+                &lt;!&ndash; 匹配时的操作：接收（记录） &ndash;&gt;
+                <onMatch>ACCEPT</onMatch>
+                &lt;!&ndash; 不匹配时的操作：拒绝（不记录） &ndash;&gt;
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </appender>-->
+
+    <!--    &lt;!&ndash; 用户访问日志输出  &ndash;&gt;
+        <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.path}/sys-user.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                &lt;!&ndash; 按天回滚 daily &ndash;&gt;
+                <fileNamePattern>${log.path}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>
+                &lt;!&ndash; 日志最大的历史 60天 &ndash;&gt;
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>-->
+
+    <!-- 系统模块日志级别控制  -->
+    <logger name="big.data" level="debug" />
+    <!-- Spring日志级别控制  -->
+    <logger name="org.springframework" level="warn" />
+
+    <root level="info">
+        <appender-ref ref="console" />
+    </root>
+
+    <!--系统操作日志-->
+    <root level="info">
+        <!--        <appender-ref ref="file_info" />
+                <appender-ref ref="file_error" />-->
+        <appender-ref ref="file_OneDay_All" />
+    </root>
+
+    <!--    &lt;!&ndash;系统用户操作日志&ndash;&gt;
+        <logger name="sys-user" level="info">
+            <appender-ref ref="sys-user"/>
+        </logger>-->
+</configuration>

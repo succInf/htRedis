@@ -1,0 +1,14 @@
+server:
+  port: 30002
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/*/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-prefix: [mybatis-plus]
+  global-config:
+    banner: false
+    #db-config:
+  id-type: 0
+spring:
+  mvc:
+    static-path-pattern: /static/**

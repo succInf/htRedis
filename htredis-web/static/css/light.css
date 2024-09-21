@@ -1,0 +1,41 @@
+.light-content{
+	width: 100vw;
+	height: 100vh;
+}
+.wi100{width: 100%;height: 100%;}
+.ht-title{width: 100%;margin: auto;text-align: center;font-size: 32px;font-weight: bolder;transform: none;}
+.height100vh{
+	height: 100vh;
+}
+.height5vh{
+	height: 5vh;
+}
+.height10vh{
+	height: 10vh;
+}
+.height20vh{
+	height: 20vh;
+}
+.height30vh{
+	height: 30vh;
+}
+.height40vh{
+	height: 40vh;
+}
+.height60vh{
+	height: 60vh;
+}
+.height80vh{
+	height: 80vh;
+}
+.height90vh{
+	height: 90vh;
+}
+.border_bottom{border-bottom:1px solid #e2e2e2;}
+.border_right{border-right: 1px solid #e2e2e2;}
+.border_top{border-top:1px solid #e2e2e2;}
+.flex_column{display: flex;flex-direction: column;flex-wrap: wrap;text-align: center;width: 100%;}
+.courser{cursor: pointer;}
+.activeInf{border-left:3px solid red;height: 48px;}
+.backgroundF2{background: #f2f2f2}
+.footer{font-weight: bolder;color: #000000}
